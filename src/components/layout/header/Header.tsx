@@ -1,14 +1,18 @@
-import { ReactElement } from "react";
 import mealsImage from "../../../assets/meals.jpg";
-import Button from "../../ui/button/Button";
+import Button from "../../ui/button/HeaderCartButton";
 import classes from "./Header.module.css";
 
-const Header = (): ReactElement => {
+interface HeaderProps {
+  onShowCart: () => void;
+  onHideCart: () => void;
+}
+
+const Header = ({ onShowCart, onHideCart }: HeaderProps) => {
   return (
     <>
       <header className={classes.header}>
         <h1>ReactMeals</h1>
-        <Button>Cart</Button>
+        <Button onClick={onShowCart}>Cart</Button>
       </header>
       <div className={classes["main-image"]}>
         <img src={mealsImage} alt="a table full of food" />
