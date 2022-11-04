@@ -1,10 +1,15 @@
 import classes from "./MealItem.module.css";
 import { Meal } from "../types";
 import MealItemForm from "../mealItemForm/MealItemForm";
+import { useCartContext } from "../../../context/cartContext";
 
 interface MealProps extends Meal {}
 
-const MealItem = ({ name, description, price }: MealProps) => {
+const MealItem = ({ id, name, description, price }: MealProps) => {
+  const { addItem } = useCartContext();
+  const addToCartHandler = (amount: number) => {
+    addItem({ id, name, description, price, amount });
+  };
   return (
     <li className={classes.meal}>
       <div>
@@ -13,7 +18,7 @@ const MealItem = ({ name, description, price }: MealProps) => {
         <div>{`$${price.toFixed(2)}`}</div>
       </div>
       <div>
-        <MealItemForm />
+        <MealItemForm onAddToCart={addToCartHandler} id={+id} />
       </div>
     </li>
   );

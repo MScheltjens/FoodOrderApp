@@ -1,5 +1,5 @@
 import { ReactNode, useContext } from "react";
-import CartContext, { useCardContext } from "../../../context/cartContext";
+import CartContext, { useCartContext } from "../../../context/cartContext";
 import CartIcon from "../../icon/CartIcon";
 import { Meal } from "../../meals/types";
 import classes from "./HeaderCartButton.module.css";
@@ -9,9 +9,9 @@ interface HeaderButtonProps {
   children: ReactNode;
 }
 const HeaderCartButton = ({ onClick }: HeaderButtonProps) => {
-  const { items } = useCardContext();
+  const { items } = useCartContext();
   const numberOfCartItems = items.reduce((curNumber: number, item) => {
-    return curNumber + item.amount;
+    return curNumber + item.amount!;
   }, 0);
 
   return (
@@ -20,7 +20,7 @@ const HeaderCartButton = ({ onClick }: HeaderButtonProps) => {
         <CartIcon />
       </span>
       <span>Your Cart</span>
-      <span className={classes.badge}>3</span>
+      <span className={classes.badge}>{numberOfCartItems}</span>
     </button>
   );
 };

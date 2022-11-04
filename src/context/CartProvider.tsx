@@ -1,6 +1,5 @@
 import { ReactNode, useReducer } from "react";
 import { Meal } from "../components/meals/types";
-import { cartItems } from "../data/dummyData";
 import CartContext, { CartContextInterface } from "./cartContext";
 
 interface CartProviderProps {
@@ -21,9 +20,9 @@ const defaultCart: RCartState = {
 
 const cartReducer = (state: RCartState, action: RAction) => {
   if (action.type === "ADD") {
-    const updatedItems = [...state.items, action.item];
+    const updatedItems = state.items.concat(action.item);
     const updatedTotalAmount =
-      state.totalAmount + action.item.price * action.item.amount;
+      state.totalAmount + action.item.price * action.item.amount!;
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
@@ -35,7 +34,7 @@ const cartReducer = (state: RCartState, action: RAction) => {
 const CartProvider = ({ children }: CartProviderProps) => {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCart);
   const addItem = (item: Meal) => {
-    dispatchCartAction({ type: "ADD", item });
+    dispatchCartAction({ type: "ADD", item: item });
   };
 
   const removeItem = (id: string) => {

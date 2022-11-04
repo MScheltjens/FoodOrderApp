@@ -15,6 +15,6 @@ const CartContext = createContext<CartContextInterface>({
   removeItem: (id) => {},
 });
 
-export const useCardContext = () => useContext(CartContext);
+export const useCartContext = () => useContext(CartContext);
 
 export default CartContext;
