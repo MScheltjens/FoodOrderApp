@@ -24,3 +24,8 @@ export const DUMMY_MEALS = [
     price: 18.99,
   },
 ];
+
+export const cartItems = [
+  { id: "c1", name: "Sushi", amount: 2, price: 12.99 },
+  { id: "c2", name: "Pizza", amount: 3, price: 45.99 },
+];

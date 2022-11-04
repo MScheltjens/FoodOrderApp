@@ -1,5 +1,5 @@
 import classes from "./AvailableMeals.module.css";
-import { DUMMY_MEALS as mealsList } from "../../../data/dummyMeals";
+import { DUMMY_MEALS as mealsList } from "../../../data/dummyData";
 import Card from "../../ui/card/Card";
 import MealItem from "../mealtem/MealItem";
 
