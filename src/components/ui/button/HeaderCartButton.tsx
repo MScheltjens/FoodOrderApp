@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import CartContext, { useCartContext } from "../../../context/cartContext";
 import CartIcon from "../../icon/CartIcon";
 import { Meal } from "../../meals/types";
@@ -9,13 +9,31 @@ interface HeaderButtonProps {
   children: ReactNode;
 }
 const HeaderCartButton = ({ onClick }: HeaderButtonProps) => {
+  const [btnHighlighted, setBtnHighlighted] = useState<boolean>(false);
   const { items } = useCartContext();
+
   const numberOfCartItems = items.reduce((curNumber: number, item) => {
     return curNumber + item.amount!;
   }, 0);
 
+  const btnClasses = `${classes.button} ${btnHighlighted ? classes.bump : ""}`;
+
+  useEffect(() => {
+    if (items.length === 0) {
+      return;
+    }
+    setBtnHighlighted(true);
+    const timer = setTimeout(() => {
+      setBtnHighlighted(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [items]);
+
   return (
-    <button className={classes.button} onClick={onClick}>
+    <button className={btnClasses} onClick={onClick}>
       <span>
         <CartIcon />
       </span>
