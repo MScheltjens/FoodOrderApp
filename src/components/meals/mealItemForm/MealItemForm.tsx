@@ -31,7 +31,7 @@ const MealItemForm = ({ id, onAddToCart }: MealItemFormProps) => {
         ref={amountInputRef}
         label="Amount"
         input={{
-          id: `amount-${id}`,
+          id: `amount-${+id}`,
           type: "number",
           min: "1",
           max: "5",

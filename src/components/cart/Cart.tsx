@@ -2,7 +2,6 @@ import classes from "./Cart.module.css";
 import Modal from "../ui/modal/Modal";
 import { useCartContext } from "../../context/cartContext";
 import CartItem from "./cartItems/CartItem";
-import { Meal } from "../meals/types";
 
 interface CartProps {
   onClose: () => void;
@@ -23,9 +22,12 @@ const Cart = ({ onClose }: CartProps) => {
               amount={item.amount}
               price={item.price}
               onAdd={() => {
-                addItem(item, 1);
+                const cartItem = { ...item, amount: 1 };
+                addItem(cartItem);
               }}
-              onRemove={() => {}}
+              onRemove={() => {
+                removeItem(item.id!);
+              }}
             />
           ))}
         </ul>
