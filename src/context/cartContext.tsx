@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 export interface CartContextInterface {
   items: Meal[];
   totalAmount: number;
-  addItem: (item: Meal) => void;
+  addItem: (item: Meal, amount: number) => void;
   removeItem: (id: string) => void;
 }
 
