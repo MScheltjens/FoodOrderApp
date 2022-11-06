@@ -2,9 +2,7 @@ import { Meal } from "../components/meals/types";
 
 export const getAllMeals = async (): Promise<Meal[]> => {
   const data = await (
-    await fetch(
-      "https://react-training-99e5b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
-    )
+    await fetch(`${import.meta.env.VITE_ENDPOINT}/meals.json`)
   ).json();
   const loadedMeals = [];
 

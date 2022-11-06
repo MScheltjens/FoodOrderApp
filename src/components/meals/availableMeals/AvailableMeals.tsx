@@ -9,6 +9,8 @@ import { useQuery } from "react-query";
 const AvailableMeals = (): ReactElement => {
   const { data: meals, isLoading, isError } = useQuery("todos", getAllMeals);
 
+  if (isLoading) return <p className={classes.mealsLoading}>Loading...</p>;
+  if (isError) return <section>Something went wrong!</section>;
   return (
     <>
       <section className={classes.meals}>
