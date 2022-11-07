@@ -1,13 +1,11 @@
 import classes from "./AvailableMeals.module.css";
-
 import Card from "../../ui/card/Card";
 import MealItem from "../mealtem/MealItem";
-import { ReactElement, useEffect } from "react";
-import { getAllMeals } from "../../../utils/apiService";
-import { useQuery } from "react-query";
+import { ReactElement } from "react";
+import { useGetAllMeals } from "../../hooks/useMealData";
 
 const AvailableMeals = (): ReactElement => {
-  const { data: meals, isLoading, isError } = useQuery("todos", getAllMeals);
+  const { data: meals, isLoading, isError } = useGetAllMeals();
 
   if (isLoading) return <p className={classes.mealsLoading}>Loading...</p>;
   if (isError) return <section>Something went wrong!</section>;

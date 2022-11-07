@@ -2,13 +2,26 @@ import classes from "./Cart.module.css";
 import Modal from "../ui/modal/Modal";
 import { useCartContext } from "../../context/cartContext";
 import CartItem from "./cartItems/CartItem";
+import Checkout from "./checkout/Checkout";
+import { useState } from "react";
+import { Meal, UserDetails } from "../types";
+import { addOrderedMeals } from "../../utils/apiService";
+import { useAddOrderedMeals } from "../hooks/useMealData";
 
-interface CartProps {
+export interface CartProps {
   onClose: () => void;
 }
 
 const Cart = ({ onClose }: CartProps) => {
+  const [isCheckingOut, setIsCheckingOut] = useState<boolean>(false);
   const { totalAmount, items, addItem, removeItem } = useCartContext();
+  const { mutate } = useAddOrderedMeals();
+
+  const orderHandler = (body: { user: UserDetails; items: Meal[] }) => {
+    setIsCheckingOut(true);
+    mutate(body);
+    // addOrderedMeals(body); // make in useMutation!!
+  };
 
   return (
     <Modal onClose={onClose}>
@@ -35,14 +48,21 @@ const Cart = ({ onClose }: CartProps) => {
           <span>Total Amount</span>
           <span>{totalAmount.toFixed(2)}</span>
         </div>
-        <div className={classes.actions}>
-          <button className={classes["button--alt"]} onClick={onClose}>
-            Close
-          </button>
-          {items.length > 0 && (
-            <button className={classes.button}>Order</button>
-          )}
-        </div>
+        {isCheckingOut && (
+          <Checkout onConfirm={orderHandler} onClose={onClose} />
+        )}
+        {!isCheckingOut && (
+          <div className={classes.actions}>
+            <button className={classes["button--alt"]} onClick={onClose}>
+              Close
+            </button>
+            {items.length > 0 && (
+              <button className={classes.button} onClick={() => orderHandler}>
+                Order
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </Modal>
   );

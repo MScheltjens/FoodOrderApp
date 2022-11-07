@@ -1,4 +1,4 @@
-import { Meal } from "../../meals/types";
+import { Meal } from "../../types";
 import classes from "./CartItem.module.css";
 
 interface CartItemProps extends Meal {

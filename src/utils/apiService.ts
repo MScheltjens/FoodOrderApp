@@ -1,9 +1,17 @@
-import { Meal } from "../components/meals/types";
+import { Meal, UserDetails } from "../components/types";
+
+export interface IAddOrderedMeals {
+  user: UserDetails;
+  items: Meal[];
+}
 
 export const getAllMeals = async (): Promise<Meal[]> => {
-  const data = await (
-    await fetch(`${import.meta.env.VITE_ENDPOINT}/meals.json`)
-  ).json();
+  const res = await fetch(`${import.meta.env.VITE_ENDPOINT}/meals.json`);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  const data = await res.json();
+
   const loadedMeals = [];
 
   for (const key in data) {
@@ -16,4 +24,20 @@ export const getAllMeals = async (): Promise<Meal[]> => {
   }
   console.log(loadedMeals);
   return loadedMeals;
+};
+
+export const addOrderedMeals = async (
+  body: IAddOrderedMeals
+): Promise<{ name: string }> => {
+  const res = await fetch(`${import.meta.env.VITE_ENDPOINT}/orders.json`, {
+    method: "POST",
+    body: JSON.stringify({
+      body: body ? JSON.stringify(body) : undefined,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  const data = await res.json();
+  return data;
 };

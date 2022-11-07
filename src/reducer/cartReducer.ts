@@ -1,4 +1,4 @@
-import { Meal } from "../components/meals/types";
+import { Meal } from "../components/types";
 
 type RAction = { type: "ADD"; item: Meal } | { type: "REMOVE"; id: string };
 

@@ -1,4 +1,4 @@
-import { Meal } from "../components/meals/types";
+import { Meal } from "../components/types";
 import { createContext, ReactNode, useContext, useState } from "react";
 
 export interface CartContextInterface {

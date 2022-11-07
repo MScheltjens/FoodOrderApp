@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
 import CartContext, { useCartContext } from "../../../context/cartContext";
 import CartIcon from "../../icon/CartIcon";
-import { Meal } from "../../meals/types";
+import { Meal } from "../../types";
 import classes from "./HeaderCartButton.module.css";
 
 interface HeaderButtonProps {

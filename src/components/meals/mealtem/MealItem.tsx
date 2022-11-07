@@ -1,5 +1,5 @@
 import classes from "./MealItem.module.css";
-import { Meal } from "../types";
+import { Meal } from "../../types";
 import MealItemForm from "../mealItemForm/MealItemForm";
 import { useCartContext } from "../../../context/cartContext";
 

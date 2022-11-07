@@ -1,5 +1,5 @@
 import { ReactNode, useReducer } from "react";
-import { Meal } from "../components/meals/types";
+import { Meal } from "../components/types";
 import CartContext, { CartContextInterface } from "./cartContext";
 import cartReducer, { defaultCart } from "../reducer/cartReducer";
 
