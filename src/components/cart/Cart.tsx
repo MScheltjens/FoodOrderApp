@@ -1,3 +1,4 @@
+// @ts-nocheck
 import classes from "./Cart.module.css";
 import Modal from "../ui/modal/Modal";
 import { useCartContext } from "../../context/cartContext";
@@ -59,6 +60,7 @@ const Cart = ({ onClose }: CartProps) => {
             <button className={classes["button--alt"]} onClick={onClose}>
               Close
             </button>
+            {/*@-ts-ignore*/}
             {items.length > 0 && (
               <button className={classes.button} onClick={orderHandler}>
                 Order

@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { Meal } from "../../types";
 import classes from "./CartItem.module.css";
 
