@@ -22,7 +22,6 @@ export const getAllMeals = async (): Promise<Meal[]> => {
       price: data[key].price,
     });
   }
-  console.log(loadedMeals);
   return loadedMeals;
 };
 

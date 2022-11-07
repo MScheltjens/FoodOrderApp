@@ -1,6 +1,9 @@
 import { Meal } from "../components/types";
 
-type RAction = { type: "ADD"; item: Meal } | { type: "REMOVE"; id: string };
+type RAction =
+  | { type: "ADD"; item: Meal }
+  | { type: "REMOVE"; id: string }
+  | { type: "CLEAR" };
 
 type RCartState = {
   items: Meal[];
@@ -59,50 +62,10 @@ const cartReducer = (state: RCartState, action: RAction) => {
       totalAmount: updatedTotalAmount,
     };
   }
-  //   if (action.type === "ADD") {
-  //     const updatedTotalAmount =
-  //       state.totalAmount + action.item.amount! * action.item.price!;
-  //     const existingCartItemIndex = state.items.findIndex(
-  //       (item) => item.id === action.item.id
-  //     );
-  //     const existingCartItem = state.items[existingCartItemIndex];
-  //     let updatedItems;
+  if (action.type === "CLEAR") {
+    return { items: [], totalAmount: 0 };
+  }
 
-  //     if (existingCartItem) {
-  //       const updatedItem = {
-  //         ...existingCartItem,
-  //         amount: existingCartItem.amount! + action.item.amount!,
-  //       };
-  //       updatedItems = [...state.items];
-  //       updatedItems[existingCartItemIndex] = updatedItem;
-  //     } else {
-  //       updatedItems = state.items.concat(action.item);
-  //     }
-
-  //     return {
-  //       items: updatedItems,
-  //       totalAmount: updatedTotalAmount,
-  //     };
-  //   }
-  //   if (action.type === "REMOVE") {
-  //     const existingCartItemIndex = state.items.findIndex(
-  //       (item) => item.id === action.id
-  //     );
-  //     const existingCartItem = state.items[existingCartItemIndex];
-  //     const updatedTotalAmount = state.totalAmount - existingCartItem.price;
-  //     let updatedItems;
-  //     if (existingCartItem.amount === 1) {
-  //       updatedItems = state.items.filter((item) => item.id !== action.id);
-  //     } else {
-  //       const updatedItem = {
-  //         ...existingCartItem,
-  //         amount: existingCartItem.amount! + 1,
-  //       };
-  //       updatedItems = [...state.items];
-  //       updatedItems[existingCartItemIndex] = updatedItem;
-  //     }
-  //     return { items: updatedItems, totalAmount: updatedTotalAmount };
-  //   }
   return { items: [], totalAmount: 0 };
 };
 

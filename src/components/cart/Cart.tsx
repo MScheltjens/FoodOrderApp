@@ -5,7 +5,6 @@ import CartItem from "./cartItems/CartItem";
 import Checkout from "./checkout/Checkout";
 import { useState } from "react";
 import { Meal, UserDetails } from "../types";
-import { addOrderedMeals } from "../../utils/apiService";
 import { useAddOrderedMeals } from "../hooks/useMealData";
 
 export interface CartProps {
@@ -14,14 +13,18 @@ export interface CartProps {
 
 const Cart = ({ onClose }: CartProps) => {
   const [isCheckingOut, setIsCheckingOut] = useState<boolean>(false);
-  const { totalAmount, items, addItem, removeItem } = useCartContext();
-  const { mutate } = useAddOrderedMeals();
+  const { totalAmount, items, addItem, removeItem, clearCart } =
+    useCartContext();
+  const { mutate, isSuccess, error } = useAddOrderedMeals();
 
   const orderHandler = (body: { user: UserDetails; items: Meal[] }) => {
     setIsCheckingOut(true);
     mutate(body);
-    // addOrderedMeals(body); // make in useMutation!!
   };
+
+  if (isSuccess) {
+    clearCart();
+  }
 
   return (
     <Modal onClose={onClose}>
@@ -57,7 +60,7 @@ const Cart = ({ onClose }: CartProps) => {
               Close
             </button>
             {items.length > 0 && (
-              <button className={classes.button} onClick={() => orderHandler}>
+              <button className={classes.button} onClick={orderHandler}>
                 Order
               </button>
             )}

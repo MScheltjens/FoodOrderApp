@@ -16,6 +16,7 @@ const Checkout = ({ onClose, onConfirm }: Checkout) => {
     city: true,
     postal: true,
   });
+
   const nameInputRef = useRef<HTMLInputElement>(null);
   const streetInputRef = useRef<HTMLInputElement>(null);
   const postalInputRef = useRef<HTMLInputElement>(null);
